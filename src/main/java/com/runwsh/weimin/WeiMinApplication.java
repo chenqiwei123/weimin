@@ -1,4 +1,4 @@
-package com.runwsh.weiMin;
+package com.runwsh.weimin;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
