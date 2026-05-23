@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.runwsh.weimin.mapper.AsyncTaskMapper">
+
+    <resultMap id="BaseResultMap" type="com.runwsh.weimin.entity.AsyncTask">
+        <id column="id" property="id"/>
+        <result column="task_name" property="taskName"/>
+        <result column="task_type" property="taskType"/>
+        <result column="task_status" property="taskStatus"/>
+        <result column="task_params" property="taskParams"/>
+        <result column="start_time" property="startTime"/>
+        <result column="end_time" property="endTime"/>
+        <result column="execution_time" property="executionTime"/>
+        <result column="error_message" property="errorMessage"/>
+        <result column="retry_count" property="retryCount"/>
+        <result column="max_retry_count" property="maxRetryCount"/>
+        <result column="created_at" property="createdAt"/>
+        <result column="updated_at" property="updatedAt"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="com.runwsh.weimin.entity.AsyncTask" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO async_task (
+            task_name, task_type, task_status, task_params, 
+            start_time, end_time, execution_time, error_message,
+            retry_count, max_retry_count, created_at, updated_at
+        ) VALUES (
+            #{taskName}, #{taskType}, #{taskStatus}, #{taskParams},
+            #{startTime}, #{endTime}, #{executionTime}, #{errorMessage},
+            #{retryCount}, #{maxRetryCount}, #{createdAt}, #{updatedAt}
+        )
+    </insert>
+
+    <update id="updateById" parameterType="com.runwsh.weimin.entity.AsyncTask">
+        UPDATE async_task SET
+            task_name = #{taskName},
+            task_type = #{taskType},
+            task_status = #{taskStatus},
+            task_params = #{taskParams},
+            start_time = #{startTime},
+            end_time = #{endTime},
+            execution_time = #{executionTime},
+            error_message = #{errorMessage},
+            retry_count = #{retryCount},
+            max_retry_count = #{maxRetryCount},
+            updated_at = #{updatedAt}
+        WHERE id = #{id}
+    </update>
+
+    <select id="selectById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        SELECT * FROM async_task WHERE id = #{id}
+    </select>
+
+    <select id="selectByStatus" parameterType="java.lang.String" resultMap="BaseResultMap">
+        SELECT * FROM async_task WHERE task_status = #{status}
+    </select>
+
+    <select id="selectByType" parameterType="java.lang.String" resultMap="BaseResultMap">
+        SELECT * FROM async_task WHERE task_type = #{type}
+    </select>
+
+    <select id="selectPendingTasks" resultMap="BaseResultMap">
+        SELECT * FROM async_task WHERE task_status = 'PENDING' ORDER BY created_at ASC
+    </select>
+
+</mapper>
