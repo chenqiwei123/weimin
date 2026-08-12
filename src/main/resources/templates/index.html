@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>请求加载数据中...</title>
+    <style>
+
+        body{
+
+            margin:30px;
+
+            background:#f3f5f7;
+
+            font-family:Consolas;
+
+        }
+
+        .title{
+
+            font-size:30px;
+
+            font-weight:bold;
+
+            margin-bottom:20px;
+
+        }
+
+        .card{
+
+            background:white;
+
+            margin-bottom:25px;
+
+            border-radius:10px;
+
+            overflow:hidden;
+
+            box-shadow:0 3px 12px rgba(0,0,0,.15);
+
+        }
+
+        .header{
+
+            padding:15px;
+
+            display:flex;
+
+            justify-content:space-between;
+
+            align-items:center;
+
+            background:#fafafa;
+
+            border-bottom:1px solid #ddd;
+
+        }
+
+        .success{
+
+            color:#28a745;
+
+            font-weight:bold;
+
+        }
+
+        .fail{
+
+            color:#dc3545;
+
+            font-weight:bold;
+
+        }
+
+        .section{
+
+            padding:15px;
+
+        }
+
+        .section-title{
+
+            font-size:18px;
+
+            margin-bottom:10px;
+
+        }
+
+        pre{
+
+            background:#272822;
+
+            color:#eee;
+
+            padding:15px;
+
+            overflow:auto;
+
+            border-radius:5px;
+
+            white-space:pre-wrap;
+
+        }
+
+        button{
+
+            padding:6px 15px;
+
+            border:none;
+
+            border-radius:4px;
+
+            cursor:pointer;
+
+        }
+
+        .copy{
+
+            background:#409EFF;
+
+            color:white;
+
+        }
+
+    </style>
+</head>
+
+<body>
+
+<h1>Hello</h1>
+
+<div class="title">
+
+    ICBC接口调试
+
+</div>
+
+<div class="card"
+
+     th:each="item,status:${list}">
+
+    <div class="header">
+
+        <div>
+
+            第
+
+            <span th:text="${status.count}"></span>
+
+            条
+
+        </div>
+
+        <div>
+
+<span
+
+        th:class="${item.success}"
+
+        th:text="${item.success}">
+
+</span>
+
+        </div>
+
+    </div>
+
+    <div class="section">
+
+        <div class="section-title">
+
+            Cookie
+
+            <button class="copy"
+
+                    th:attr="data-copy=${item.cookie}">
+
+                复制
+
+            </button>
+
+        </div>
+
+        <pre th:text="${item.cookie}"></pre>
+
+    </div>
+
+    <div class="section">
+
+        <div class="section-title">
+
+            JSON
+
+            <button class="copy"
+
+                    th:attr="data-copy=${item.json}">
+
+                复制
+
+            </button>
+
+        </div>
+
+        <pre th:text="${item.json}"></pre>
+
+    </div>
+
+</div>
+</body>
+</html>
+
+<script>
+
+    document.querySelectorAll(".copy")
+
+    .forEach(btn=>{
+
+    btn.onclick=function(){
+
+    navigator.clipboard.writeText(
+
+    this.dataset.copy
+
+    );
+
+    alert("复制成功");
+
+    }
+
+    })
+
+</script>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>任务启动成功</title>
+</head>
+
+<body class="bg-light">
+
+<div class="container mt-5">
+
+    <div class="card shadow-lg border-0">
+
+        <div class="card-header bg-success text-white">
+
+            <h3 class="mb-0">
+                🎉 ICBC Loan 自动化任务
+            </h3>
+
+        </div>
+
+        <div class="card-body text-center">
+
+            <h2 class="text-success">
+                任务启动成功
+            </h2>
+
+            <p class="text-muted mt-3">
+
+                后台已开始执行贷款自动化任务，请勿重复启动。
+
+            </p>
+
+            <div class="alert alert-info">
+
+                查询地址：
+
+                <br>
+
+                <code>/demo/showLoan</code>
+
+            </div>
+
+            <a class="btn btn-primary btn-lg"
+               th:href="@{/demo/showLoan}">
+                查看执行结果
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>
